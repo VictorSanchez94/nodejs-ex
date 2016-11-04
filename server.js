@@ -15,6 +15,11 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
+var gameInfo = {
+  offers = '3',
+  drones = '5'
+};
+
 /*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
@@ -76,6 +81,14 @@ app.get('/test', function (req, res) {
     res.send('HOLA HOLA!');
     //res.render('prueba.html', { pageCountMessage : null});
   //}
+});
+
+app.get('/gameInfo', function (req, res) {
+    res.send(gameInfo);
+});
+
+app.get('/gameInfo/offers', function (req, res) {
+    res.send(gameInfo.offers);
 });
 
 app.get('/pagecount', function (req, res) {
