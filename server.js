@@ -91,6 +91,14 @@ app.get('/gameInfo/offers', function (req, res) {
     res.send(gameInfo.offers);
 });
 
+app.get('/gameInfo/drones', function (req, res) {
+    res.send(gameInfo.drones);
+});
+
+app.post('/gameInfo/addDrones', function (req, res) {
+    gameInfo.drones = gameInfo.drones + req.data.newDrones;
+});
+
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
