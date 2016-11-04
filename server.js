@@ -16,8 +16,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURLLabel = "";
 
 var gameInfo = {
-  'offers': '3',
-  'drones': '5'
+  'offers': 3,
+  'drones': 5
 };
 
 /*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
