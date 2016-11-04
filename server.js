@@ -152,17 +152,17 @@ app.post('/updateState/:playerId', function (req, res) {
 
 
 app.get('/gameInfo/:id', function (req, res) {
-  if (req.params.id == 1) {
+  /*if (req.params.id == 1) {
     res.send('PENE' + req.params.id);
   }else{  
     res.send('VAGINA' + req.params.id);
-  }
-  /*if (req.params.id === 1) {
+  }*/
+  if (req.params.id === 1) {
     res.send(gameInfo1);
   }
   else {
     res.send(gameInfo2);
-  }*/
+  }
 });
 
 app.get('/gameInfo/offers/:id', function (req, res) {
