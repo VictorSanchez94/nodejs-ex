@@ -146,8 +146,8 @@ app.post('/updateState', function (req, res) {
 });
 
 
-app.get('/gameInfo', function (req, res) {
-  if (req.id === 1) {
+app.get('/gameInfo/:id', function (req, res) {
+  if (req.params.id === 1) {
     res.send(gameInfo1);
   }
   else {
