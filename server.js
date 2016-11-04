@@ -15,9 +15,18 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
-var gameInfo = {
+var player1Joined = false;
+var player2Joined = false;
+var winner = -1;
+
+var gameInfo1 = {
   "offers": 3,
-  "drones": 5
+  "newDrones": 5
+};
+
+var gameInfo2 = {
+  "offers": 3,
+  "newDrones": 5
 };
 
 /*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
@@ -64,55 +73,114 @@ var initDb = function(callback) {
 };*/
 
 app.get('/test', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  //if (!db) {
-    //initDb(function(err){});
-  //}
-  //if (db) {
-    //var col = db.collection('counts');
-    // Create a document with request IP and current time of request
-    //col.insert({ip: req.ip, date: Date.now()});
-    //col.count(function(err, count){
-    //  res.send('HOLA!');
-      //res.render('prueba.html', { pageCountMessage : count, dbInfo: dbDetails });
-    //});
-  //} else {
-    res.send('HOLA HOLA!');
-    //res.render('prueba.html', { pageCountMessage : null});
-  //}
+  res.send('HOLA HOLA!');
 });
 
+app.get('/join', function (req, res) {
+  if (player1Joined === false) {
+    var r = {
+      "id": 1,
+      "offers": gameInfo1.offers,
+      "newDrones": gameInfo1.newDrones
+    };
+    res.send(r);
+    player1Joined = true;
+    gameInfo1.newDrones = 0;
+  }
+  else{
+    var r = {
+      "id": 2,
+      "offers": gameInfo2.offers,
+      "newDrones": gameInfo2.newDrones
+    };
+    res.send(r);
+    player2Joined = true;
+    gameInfo2.newDrones = 0;
+  }
+});
+
+app.get('/requestToInit', function (req, res) {
+  if (player1Joined === true && player2Joined === true) {
+    res.send('INITGAME');
+  }
+  else {
+    res.send('WAIT');
+  }
+});
+
+app.post('/updateState', function (req, res) {
+  if (req.id === 1) {
+    gameInfo1.offers = req.offers;
+    if (gameInfo1.offers === 0) {
+      winner = 2;
+    }
+    gameInfo2.newDrones = req.newDrones;
+    if (winner === 1) {
+      res.send('WINNER');
+    }
+    else{
+      var r = {
+        "newDrones": gameInfo1.newDrones
+      };
+      res.send(r);
+      gameInfo1.newDrones = 0;
+    }
+  }
+  else {
+    gameInfo2.offers = req.offers;
+    if (gameInfo2.offers === 0) {
+      winner = 1;
+    }
+    gameInfo1.newDrones = req.newDrones;
+    if (winner === 2) {
+      res.send('WINNER');
+    }
+    else {
+      var r = {
+        "newDrones": gameInfo2.newDrones
+      };
+      res.send(r);
+      gameInfo2.newDrones = 0;
+    }
+  }
+});
+
+
 app.get('/gameInfo', function (req, res) {
-    res.send(gameInfo);
+  if (req.id === 1) {
+    res.send(gameInfo1);
+  }
+  else {
+    res.send(gameInfo2);
+  }
 });
 
 app.get('/gameInfo/offers', function (req, res) {
-    res.send(gameInfo.offers);
-});
+  if (req.id === 1) {
+    res.send(gameInfo1.offers);
+  }
+  else {
+    res.send(gameInfo2.offers);
+  }});
 
 app.get('/gameInfo/drones', function (req, res) {
-    res.send('{ "drones": ' + gameInfo.drones + '}');
+  if (req.id === 1) {
+    res.send(gameInfo1.newDrones);
+  }
+  else {
+    res.send(gameInfo2.newDrones);
+  }
 });
 
 app.post('/gameInfo/addDrones', function (req, res) {
-    gameInfo.drones = gameInfo.drones + req.newDrones;
-    res.send('{ "drones": ' + gameInfo.drones + '}');
-});
-
-app.get('/pagecount', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  /*if (!db) {
-    initDb(function(err){});
+  if (req.id === 1) {
+    gameInfo2.newDrones = gameInfo2.newDrones + req.newDrones;
+    res.send('OK');
   }
-  if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
-    });
-  } else {*/
-    res.send('{ pageCount: -1 }');
-  //}
+  else {
+    gameInfo1.newDrones = gameInfo1.newDrones + req.newDrones;
+    res.send('OK');
+  }
 });
 
 // error handling
