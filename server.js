@@ -108,13 +108,13 @@ app.get('/requestToInit', function (req, res) {
   }
 });
 
-app.post('/updateState/:id', function (req, res) {
+app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
   if (req.params.id == 1) {   //Player 1
-    //gameInfo1.offers = parseInt(req.body.offers, 10);
-    /*if (gameInfo1.offers == 0 && winner === -1) {
+    gameInfo1.offers = parseInt(req.params.offers, 10);
+    if (gameInfo1.offers == 0 && winner === -1) {
       winner = 2;
     }
-    gameInfo2.newDrones = req.newDrones;
+    gameInfo2.newDrones = req.params.newDrones;
     if (winner === 1) {
       res.send('WINNER');
     }
@@ -124,25 +124,16 @@ app.post('/updateState/:id', function (req, res) {
       };
       gameInfo1.newDrones = 0;
       res.send(r);
-    }*/
-    for(var key in req) {
-      var value = req[key];
-      console.log('req: ' + value);
-      for(var key2 in value) {
-        var value2 = value[key2];
-        console.log('req2: ' + value);
-      }
     }
     
-    
-    res.send('PLAYER1 UPDATED (PARAMS)  ');
+    //res.send('PLAYER1 UPDATED (PARAMS)  ');
   }
   else {                 //Player 2
-    gameInfo2.offers = req.offers;
+    gameInfo2.offers = req.params.offers;
     if (gameInfo2.offers == 0 && winner === -1) {
       winner = 1;
     }
-    gameInfo1.newDrones = req.newDrones;
+    gameInfo1.newDrones = req.params.newDrones;
     if (winner === 2) {
       res.send('WINNER');
     }
