@@ -92,12 +92,12 @@ app.get('/gameInfo/offers', function (req, res) {
 });
 
 app.get('/gameInfo/drones', function (req, res) {
-    res.send('{' + gameInfo.drones + '}');
+    res.send('{ drones: ' + gameInfo.drones + '}');
 });
 
 app.post('/gameInfo/addDrones', function (req, res) {
     gameInfo.drones = gameInfo.drones + req.newDrones;
-    res.send('{' + gameInfo.drones + '}');
+    res.send('{ drones: ' + gameInfo.drones + '}');
 });
 
 app.get('/pagecount', function (req, res) {
