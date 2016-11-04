@@ -16,8 +16,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURLLabel = "";
 
 var gameInfo = {
-  'offers': 3,
-  'drones': 5
+  "offers": 3,
+  "drones": 5
 };
 
 /*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
@@ -96,7 +96,7 @@ app.get('/gameInfo/drones', function (req, res) {
 });
 
 app.post('/gameInfo/addDrones', function (req, res) {
-    gameInfo.drones = gameInfo.drones + req.newDrones;
+    gameInfo.drones = gameInfo.drones + 2; //req.newDrones;
     res.send('{ "drones": ' + gameInfo.drones + '}');
 });
 
