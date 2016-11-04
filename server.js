@@ -110,7 +110,7 @@ app.get('/requestToInit', function (req, res) {
 
 app.post('/updateState/:id', function (req, res) {
   if (req.params.id == 1) {   //Player 1
-    gameInfo1.offers = req.offers;
+    gameInfo1.offers = parseInt(req.offers, 10);
     /*if (gameInfo1.offers == 0 && winner === -1) {
       winner = 2;
     }
