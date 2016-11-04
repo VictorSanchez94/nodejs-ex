@@ -108,8 +108,8 @@ app.get('/requestToInit', function (req, res) {
   }
 });
 
-app.post('/updateState', function (req, res) {
-  if (req.id === 1) {   //Player 1
+app.post('/updateState/:id', function (req, res) {
+  if (req.params.id === 1) {   //Player 1
     gameInfo1.offers = req.offers;
     if (gameInfo1.offers === 0 && winner === -1) {
       winner = 2;
@@ -155,16 +155,16 @@ app.get('/gameInfo/:id', function (req, res) {
   }
 });
 
-app.get('/gameInfo/offers', function (req, res) {
-  if (req.id === 1) {
+app.get('/gameInfo/offers/:id', function (req, res) {
+  if (req.params.id === 1) {
     res.send(gameInfo1.offers);
   }
   else {
     res.send(gameInfo2.offers);
   }});
 
-app.get('/gameInfo/drones', function (req, res) {
-  if (req.id === 1) {
+app.get('/gameInfo/drones/:id', function (req, res) {
+  if (req.params.id === 1) {
     res.send(gameInfo1.newDrones);
   }
   else {
