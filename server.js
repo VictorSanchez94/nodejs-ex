@@ -187,7 +187,7 @@ app.get('/gameInfo/drones/:id', function (req, res) {
 app.post('/gameInfo/addDrones', function (req, res) {
   if (req.id == 1) {
     gameInfo2.newDrones = gameInfo2.newDrones + req.newDrones;
-    res.send('OK');
+    res.send('OK 1');
   }
   else {
     gameInfo1.newDrones = gameInfo1.newDrones + req.newDrones;
