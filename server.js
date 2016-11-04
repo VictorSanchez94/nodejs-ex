@@ -125,8 +125,6 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
       gameInfo1.newDrones = 0;
       res.send(r);
     }
-    
-    //res.send('PLAYER1 UPDATED (PARAMS)  ');
   }
   else {                 //Player 2
     gameInfo2.offers = req.params.offers;
@@ -144,7 +142,6 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
       gameInfo2.newDrones = 0;
       res.send(r);
     }
-    //es.send('PLAYER2 UPDATED  ' + req.id);
   }
 });
 
@@ -175,14 +172,14 @@ app.get('/gameInfo/drones/:id', function (req, res) {
   }
 });
 
-app.post('/gameInfo/addDrones', function (req, res) {
-  if (req.id == 1) {
-    gameInfo2.newDrones = gameInfo2.newDrones + req.newDrones;
-    res.send('OK 1');
+app.post('/gameInfo/addDrones/:id', function (req, res) {
+  if (req.params.id == 1) {
+    gameInfo2.newDrones = gameInfo2.newDrones + req.params.newDrones;
+    res.send('OK ' + gameInfo2.newDrones);
   }
   else {
-    gameInfo1.newDrones = gameInfo1.newDrones + req.newDrones;
-    res.send('OK' + req.id + req.body.id);
+    gameInfo1.newDrones = gameInfo1.newDrones + req.params.newDrones;
+    res.send('OK '  + gameInfo1.newDrones);
   }
 });
 
