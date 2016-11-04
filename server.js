@@ -109,9 +109,9 @@ app.get('/requestToInit', function (req, res) {
 });
 
 app.post('/updateState', function (req, res) {
-  if (req.id === 1) {
+  if (req.id === 1) {   //Player 1
     gameInfo1.offers = req.offers;
-    if (gameInfo1.offers === 0) {
+    if (gameInfo1.offers === 0 && winner === -1) {
       winner = 2;
     }
     gameInfo2.newDrones = req.newDrones;
@@ -126,9 +126,9 @@ app.post('/updateState', function (req, res) {
       gameInfo1.newDrones = 0;
     }
   }
-  else {
+  else {                 //Player 2
     gameInfo2.offers = req.offers;
-    if (gameInfo2.offers === 0) {
+    if (gameInfo2.offers === 0 && winner === -1) {
       winner = 1;
     }
     gameInfo1.newDrones = req.newDrones;
