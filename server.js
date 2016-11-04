@@ -150,12 +150,13 @@ app.post('/updateState', function (req, res) {
 
 
 app.get('/gameInfo/:id', function (req, res) {
-  if (req.params.id === 1) {
+  res.send(req.params.id);
+  /*if (req.params.id === 1) {
     res.send(gameInfo1);
   }
   else {
     res.send(gameInfo2);
-  }
+  }*/
 });
 
 app.get('/gameInfo/offers/:id', function (req, res) {
