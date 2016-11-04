@@ -191,7 +191,7 @@ app.post('/gameInfo/addDrones', function (req, res) {
   }
   else {
     gameInfo1.newDrones = gameInfo1.newDrones + req.newDrones;
-    res.send('OK');
+    res.send('OK' + req.id + req.body.id);
   }
 });
 
