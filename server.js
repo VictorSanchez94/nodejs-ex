@@ -125,7 +125,7 @@ app.post('/updateState/:id', function (req, res) {
       gameInfo1.newDrones = 0;
       res.send(r);
     }*/
-    console.log(req.body);
+    console.log('req ' + req);
     var a = req.body.offers;
     res.send('PLAYER1 UPDATED (PARAMS)  ');
   }
