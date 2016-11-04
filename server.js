@@ -157,7 +157,7 @@ app.get('/gameInfo/:id', function (req, res) {
   }else{  
     res.send('VAGINA' + req.params.id);
   }*/
-  if (req.params.id === 1) {
+  if (req.params.id == 1) {
     res.send(gameInfo1);
   }
   else {
