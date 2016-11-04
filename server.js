@@ -126,7 +126,7 @@ app.post('/updateState', function (req, res) {
       res.send(r);
       gameInfo1.newDrones = 0;
     }*/
-    res.send('PLAYER1 UPDATED');
+    res.send('PLAYER1 UPDATED  ' + req.id);
   }
   else {                 //Player 2
     /*gameInfo2.offers = req.offers;
@@ -144,7 +144,7 @@ app.post('/updateState', function (req, res) {
       res.send(r);
       gameInfo2.newDrones = 0;
     }*/
-    res.send('PLAYER2 UPDATED');
+    res.send('PLAYER2 UPDATED  ' + req.id);
   }
 });
 
