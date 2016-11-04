@@ -109,7 +109,7 @@ app.get('/requestToInit', function (req, res) {
 });
 
 app.post('/updateState/:playerId', function (req, res) {
-  if (req.body.id == 1) {   //Player 1
+  if (req.params.playerId == 1) {   //Player 1
     /*gameInfo1.offers = req.offers;
     if (gameInfo1.offers === 0 && winner === -1) {
       winner = 2;
@@ -125,10 +125,10 @@ app.post('/updateState/:playerId', function (req, res) {
       res.send(r);
       gameInfo1.newDrones = 0;
     }*/
-    res.send('PLAYER1 UPDATED  ' + req.body.id);
+    res.send('PLAYER1 UPDATED (PARAMS)  ' + req.params.playerId);
   }
-  else if (req.params.playerId == 1) {
-    res.send('PLAYER1 UPDATED  ' + req.params.playerId);
+  else if (req.body.id == 1) {
+    res.send('PLAYER1 UPDATED  ' + req.body.id);
   }
   else {                 //Player 2
     /*gameInfo2.offers = req.offers;
@@ -152,11 +152,6 @@ app.post('/updateState/:playerId', function (req, res) {
 
 
 app.get('/gameInfo/:id', function (req, res) {
-  /*if (req.params.id == 1) {
-    res.send('PENE' + req.params.id);
-  }else{  
-    res.send('VAGINA' + req.params.id);
-  }*/
   if (req.params.id == 1) {
     res.send(gameInfo1);
   }
@@ -166,7 +161,7 @@ app.get('/gameInfo/:id', function (req, res) {
 });
 
 app.get('/gameInfo/offers/:id', function (req, res) {
-  if (req.params.id === 1) {
+  if (req.params.id == 1) {
     res.send(gameInfo1.offers);
   }
   else {
@@ -174,7 +169,7 @@ app.get('/gameInfo/offers/:id', function (req, res) {
   }});
 
 app.get('/gameInfo/drones/:id', function (req, res) {
-  if (req.params.id === 1) {
+  if (req.params.id == 1) {
     res.send(gameInfo1.newDrones);
   }
   else {
@@ -183,7 +178,7 @@ app.get('/gameInfo/drones/:id', function (req, res) {
 });
 
 app.post('/gameInfo/addDrones', function (req, res) {
-  if (req.id === 1) {
+  if (req.id == 1) {
     gameInfo2.newDrones = gameInfo2.newDrones + req.newDrones;
     res.send('OK');
   }
