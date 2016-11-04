@@ -20,7 +20,7 @@ var player2Joined = false;
 var winner = -1;
 
 var gameInfo1 = {
-  "offers": 3,
+  "offers": 4,
   "newDrones": 5
 };
 
