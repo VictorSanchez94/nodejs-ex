@@ -108,8 +108,8 @@ app.get('/requestToInit', function (req, res) {
   }
 });
 
-app.post('/updateState', function (req, res) {
-  if (req.body.id == '1') {   //Player 1
+app.post('/updateState/:playerId', function (req, res) {
+  if (req.body.id == 1) {   //Player 1
     /*gameInfo1.offers = req.offers;
     if (gameInfo1.offers === 0 && winner === -1) {
       winner = 2;
@@ -125,7 +125,10 @@ app.post('/updateState', function (req, res) {
       res.send(r);
       gameInfo1.newDrones = 0;
     }*/
-    res.send('PLAYER1 UPDATED  ' + req.id);
+    res.send('PLAYER1 UPDATED  ' + req.body.id);
+  }
+  else if (req.params.playerId == 1) {
+    res.send('PLAYER1 UPDATED  ' + req.params.playerId);
   }
   else {                 //Player 2
     /*gameInfo2.offers = req.offers;
