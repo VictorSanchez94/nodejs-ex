@@ -96,7 +96,7 @@ app.get('/gameInfo/drones', function (req, res) {
 });
 
 app.post('/gameInfo/addDrones', function (req, res) {
-    gameInfo.drones = gameInfo.drones + 2; //req.newDrones;
+    gameInfo.drones = gameInfo.drones + req.newDrones;
     res.send('{ "drones": ' + gameInfo.drones + '}');
 });
 
