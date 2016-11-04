@@ -15,7 +15,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+/*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -56,26 +56,26 @@ var initDb = function(callback) {
 
     console.log('Connected to MongoDB at: %s', mongoURL);
   });
-};
+};*/
 
 app.get('/test', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    var col = db.collection('counts');
+  //if (!db) {
+    //initDb(function(err){});
+  //}
+  //if (db) {
+    //var col = db.collection('counts');
     // Create a document with request IP and current time of request
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      res.send('HOLA!');
+    //col.insert({ip: req.ip, date: Date.now()});
+    //col.count(function(err, count){
+    //  res.send('HOLA!');
       //res.render('prueba.html', { pageCountMessage : count, dbInfo: dbDetails });
-    });
-  } else {
+    //});
+  //} else {
     res.send('HOLA HOLA!');
     //res.render('prueba.html', { pageCountMessage : null});
-  }
+  //}
 });
 
 app.get('/pagecount', function (req, res) {
