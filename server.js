@@ -152,7 +152,11 @@ app.post('/updateState/:playerId', function (req, res) {
 
 
 app.get('/gameInfo/:id', function (req, res) {
-  res.send(req.params.id);
+  if (req.params.id == 1) {
+    res.send('PENE' + req.params.id);
+  }else{  
+    res.send('VAGINA' + req.params.id);
+  }
   /*if (req.params.id === 1) {
     res.send(gameInfo1);
   }
