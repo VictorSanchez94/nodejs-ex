@@ -101,7 +101,7 @@ app.get('/join', function (req, res) {
     player1Joined = true;
     gameInfo1.newDrones = 0;
   }
-  else{
+  else if (player2Joined === false) {
     var r = {
       "id": 2,
       "offers": gameInfo2.offers,
@@ -110,6 +110,9 @@ app.get('/join', function (req, res) {
     res.send(r);
     player2Joined = true;
     gameInfo2.newDrones = 0;
+  }
+  else {
+      res.status(400).send('2 players joined now.');
   }
 });
 
