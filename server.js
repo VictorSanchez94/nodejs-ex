@@ -34,11 +34,11 @@ function resetGame() {
   player2Joined = false;
   gameInfo1 = {
     "offers": 3,
-    "newDrones": 5
+    "newDrones": 3
   };
   gameInfo2 = {
     "offers": 3,
-    "newDrones": 5
+    "newDrones": 3
   };
   winner = -1;
 };
