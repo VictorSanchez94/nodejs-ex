@@ -19,6 +19,8 @@ var player1Joined = false;
 var player2Joined = false;
 var winner = -1;
 
+var player1IP = "";
+
 var gameInfo1 = {
   "offers": 3,
   "newDrones": 5
@@ -30,6 +32,7 @@ var gameInfo2 = {
 };
 
 function resetGame() {
+  player1IP = "";
   player1Joined = false;
   player2Joined = false;
   gameInfo1 = {
@@ -101,9 +104,10 @@ app.get('/join', function (req, res) {
     };
     res.send(r);
     player1Joined = true;
+    player1IP = req.ip;
     gameInfo1.newDrones = 0;
   }
-  else if (player2Joined === false) {
+  else if (player2Joined === false && player1IP != req.ip) {
     var r = {
       "id": 2,
       "offers": gameInfo2.offers,
