@@ -107,15 +107,21 @@ app.get('/join', function (req, res) {
     player1IP = req.ip;
     gameInfo1.newDrones = 0;
   }
-  else if (player2Joined === false && player1IP != req.ip) {
-    var r = {
-      "id": 2,
-      "offers": gameInfo2.offers,
-      "newDrones": gameInfo2.newDrones
-    };
-    res.send(r);
-    player2Joined = true;
-    gameInfo2.newDrones = 0;
+  else if (player2Joined === false) {7
+    if (player1IP == req.ip) {
+      res.status(403).send('ERROR. You have player1 asigned.');
+      console.log('ERROR: IP ' + req.ip + 'has player1 asigned and sent join request.');
+    }
+    else {
+      var r = {
+        "id": 2,
+        "offers": gameInfo2.offers,
+        "newDrones": gameInfo2.newDrones
+      };
+      res.send(r);
+      player2Joined = true;
+      gameInfo2.newDrones = 0;
+    }
   }
   else {
       res.status(400).send('ERROR. 2 players joined in the game.');
