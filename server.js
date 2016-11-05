@@ -142,7 +142,7 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
     }
     else{
       var r = {
-        "offers": gameInfo1.offers,
+        "offers": gameInfo2.offers,
         "newDrones": gameInfo1.newDrones
       };
       gameInfo1.newDrones = 0;
@@ -161,7 +161,7 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
     }
     else {
       var r = {
-        "offers": gameInfo2.offers,
+        "offers": gameInfo1.offers,
         "newDrones": gameInfo2.newDrones
       };
       gameInfo2.newDrones = 0;
