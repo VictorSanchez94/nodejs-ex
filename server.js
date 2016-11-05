@@ -20,13 +20,27 @@ var player2Joined = false;
 var winner = -1;
 
 var gameInfo1 = {
-  "offers": 4,
+  "offers": 3,
   "newDrones": 5
 };
 
 var gameInfo2 = {
   "offers": 3,
   "newDrones": 5
+};
+
+function resetGame() {
+  player1Joined = false;
+  player2Joined = false;
+  var gameInfo1 = {
+    "offers": 3,
+    "newDrones": 5
+  };
+  var gameInfo2 = {
+    "offers": 3,
+    "newDrones": 5
+  };
+  winner = -1;
 };
 
 /*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
@@ -114,9 +128,10 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
     if (gameInfo1.offers == 0 && winner === -1) {
       winner = 2;
     }
-    gameInfo2.newDrones = req.params.newDrones;
+    gameInfo2.newDrones = parseInt(req.params.newDrones, 10);
     if (winner === 1) {
       res.send('WINNER');
+      resetGame();
     }
     else{
       var r = {
@@ -127,13 +142,14 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
     }
   }
   else {                 //Player 2
-    gameInfo2.offers = req.params.offers;
+    gameInfo2.offers = parseInt(req.params.offers, 10);
     if (gameInfo2.offers == 0 && winner === -1) {
       winner = 1;
     }
-    gameInfo1.newDrones = req.params.newDrones;
+    gameInfo1.newDrones = parseInt(req.params.newDrones, 10);
     if (winner === 2) {
       res.send('WINNER');
+      resetGame();
     }
     else {
       var r = {
@@ -175,11 +191,11 @@ app.get('/gameInfo/drones/:id', function (req, res) {
 app.post('/gameInfo/addDrones/:id/:newDrones', function (req, res) {
   if (req.params.id == 1) {
     gameInfo2.newDrones = gameInfo2.newDrones + parseInt(req.params.newDrones, 10);
-    res.send('OK ' + gameInfo2.newDrones);
+    res.send('OK');
   }
   else {
-    gameInfo1.newDrones = gameInfo1.newDrones + req.params.newDrones;
-    res.send('OK '  + gameInfo1.newDrones);
+    gameInfo1.newDrones = gameInfo1.newDrones + parseInt(req.params.newDrones, 10);
+    res.send('OK');
   }
 });
 
