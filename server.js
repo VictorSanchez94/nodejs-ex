@@ -87,10 +87,12 @@ var initDb = function(callback) {
 };*/
 
 app.get('/test', function (req, res) {
+  console.log('Test petition from IP ' + req.ip);
   res.send('HOLA HOLA!');
 });
 
 app.get('/join', function (req, res) {
+  console.log('Join petition from IP ' + req.ip);
   if (player1Joined === false) {
     var r = {
       "id": 1,
@@ -117,6 +119,7 @@ app.get('/join', function (req, res) {
 });
 
 app.get('/requestToInit', function (req, res) {
+  console.log('Request to init petition from IP ' + req.ip);
   if (player1Joined === true && player2Joined === true) {
     res.send('INITGAME');
   }
@@ -126,6 +129,7 @@ app.get('/requestToInit', function (req, res) {
 });
 
 app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
+  console.log('Update post from IP ' + req.ip);
   if (req.params.id == 1) {   //Player 1
     gameInfo1.offers = parseInt(req.params.offers, 10);
     if (gameInfo1.offers == 0 && winner === -1) {
@@ -166,6 +170,7 @@ app.post('/updateState/:id/:offers/:newDrones', function (req, res) {
 
 
 app.get('/gameInfo/:id', function (req, res) {
+  console.log('Game info petition from IP ' + req.ip);
   if (req.params.id == 1) {
     res.send(gameInfo1);
   }
@@ -175,6 +180,7 @@ app.get('/gameInfo/:id', function (req, res) {
 });
 
 app.get('/gameInfo/offers/:id', function (req, res) {
+  console.log('Game info -> offers petition from IP ' + req.ip);
   if (req.params.id == 1) {
     res.send(gameInfo1.offers);
   }
@@ -183,6 +189,7 @@ app.get('/gameInfo/offers/:id', function (req, res) {
   }});
 
 app.get('/gameInfo/drones/:id', function (req, res) {
+  console.log('Game info -> drones petition from IP ' + req.ip);
   if (req.params.id == 1) {
     res.send(gameInfo1.newDrones);
   }
@@ -192,6 +199,7 @@ app.get('/gameInfo/drones/:id', function (req, res) {
 });
 
 app.post('/gameInfo/addDrones/:id/:newDrones', function (req, res) {
+  console.log('Add drones petition from IP ' + req.ip);
   if (req.params.id == 1) {
     gameInfo2.newDrones = gameInfo2.newDrones + parseInt(req.params.newDrones, 10);
     res.send('OK');
