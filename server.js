@@ -114,7 +114,7 @@ app.get('/join', function (req, res) {
     gameInfo2.newDrones = 0;
   }
   else {
-      res.status(400).send('2 players joined now.');
+      res.status(400).send('ERROR. 2 players joined in the game.');
   }
 });
 
@@ -208,6 +208,11 @@ app.post('/gameInfo/addDrones/:id/:newDrones', function (req, res) {
     gameInfo1.newDrones = gameInfo1.newDrones + parseInt(req.params.newDrones, 10);
     res.send('OK');
   }
+});
+
+app.get('/resetGame', function (req, res) {
+  console.log('Reset game petition from IP ' + req.ip);
+  resetGame();
 });
 
 // error handling
