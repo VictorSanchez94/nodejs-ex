@@ -213,6 +213,7 @@ app.post('/gameInfo/addDrones/:id/:newDrones', function (req, res) {
 app.get('/resetGame', function (req, res) {
   console.log('Reset game petition from IP ' + req.ip);
   resetGame();
+  res.send('RESET');
 });
 
 // error handling
