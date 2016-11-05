@@ -21,12 +21,12 @@ var winner = -1;
 
 var gameInfo1 = {
   "offers": 3,
-  "newDrones": 5
+  "newDrones": 3
 };
 
 var gameInfo2 = {
   "offers": 3,
-  "newDrones": 5
+  "newDrones": 3
 };
 
 function resetGame() {
