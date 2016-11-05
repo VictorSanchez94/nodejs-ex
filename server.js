@@ -32,11 +32,11 @@ var gameInfo2 = {
 function resetGame() {
   player1Joined = false;
   player2Joined = false;
-  var gameInfo1 = {
+  gameInfo1 = {
     "offers": 3,
     "newDrones": 5
   };
-  var gameInfo2 = {
+  gameInfo2 = {
     "offers": 3,
     "newDrones": 5
   };
